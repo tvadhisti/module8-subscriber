@@ -23,4 +23,12 @@ This string is commonly used in configurations and scripts to establish a connec
 
 ![Screenshot 2024-04-24 at 02 36 08](https://github.com/tvadhisti/module8-subscriber/assets/127074983/a2120d86-c722-42c1-88fb-3c1564447eb9)
 
-When I ran my publisher three times, it sent out a total of 15 messages to the queue. However, my subscriber adds a delay of one second for each message it processes. Because of this delay, the subscriber hadn’t finished processing all the messages by the time I checked the queue, which resulted in a total of 11 unacknowledged messages. These are messages that have been received by the subscriber but are still waiting to be processed.
+I ran the publisher code three times, which sent out 15 messages. The subscriber code processes each message with a one second delay. This delay simulates a slow subscriber. Because the subscriber is slow, it doesn't keep up with the incoming messages. By the time I looked at the RabbitMQ, there were 11 unacknowledged messages. These messages are in the queue waiting to be processed by the subscriber. The buildup occurs because the subscriber is processing messages slower than the rate at which they're being published.
+
+#  Running at least three subscribers
+![Screenshot 2024-04-24 at 03 16 49](https://github.com/tvadhisti/module8-subscriber/assets/127074983/b36db61f-c268-485e-854e-0398e6b2a323)
+
+![Screenshot 2024-04-24 at 03 17 08](https://github.com/tvadhisti/module8-subscriber/assets/127074983/a630721f-a8a3-4165-a431-ee06f7bc6fea)
+
+I ran the subscriber on three terminals and executed the publisher 4 or 5 times, and the queue showed only 5 unacknowledged messages. This shows that using more subscribers at the same time can really help in dealing with messages faster. Still, the messages are piling up a little, which means sometimes the publisher sends them faster than the subscribers can handle. If I use asynchronous processing in the subscribers, it could make things work better. This way, the subscribers wouldn't have to wait and could take messages as they come. Making this change would likely stop messages from getting backed up. It would keep the flow of messages smooth, even when the publisher is sending a lot.
+
