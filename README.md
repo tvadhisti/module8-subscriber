@@ -1,4 +1,4 @@
-### Reflection 1
+# Reflection 1
 a. what is amqp?
 
 AMQP stands for Advanced Message Queuing Protocol. It's a way for different computer programs to send messages to each other without needing to connect directly. This protocol defines a set of rules for how messages should be formatted and exchanged between systems. 
